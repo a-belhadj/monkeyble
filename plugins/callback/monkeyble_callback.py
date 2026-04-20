@@ -169,7 +169,7 @@ class CallbackModule(CallbackBase):
         self._display.debug("Run v2_runner_on_failed")
         host = result._host
         self.host_failed[host.get_name()] = result
-        has_rescue = result._task._parent.rescue
+        has_rescue = getattr(result._task._parent, 'rescue', False)
         self.check_if_task_should_have_failed(task_has_actually_failed=True, has_rescue=has_rescue)
 
     def v2_runner_on_skipped(self, result, **kwargs):
